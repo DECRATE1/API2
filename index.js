@@ -29,11 +29,3 @@ async function main(){
 
 main();
 
-
-process.on("SIGINT", async() => {
-      
-    await disconnect();
-    console.log("Приложение завершило работу");
-    process.exit();
-
-});
