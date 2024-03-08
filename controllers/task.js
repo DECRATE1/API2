@@ -20,8 +20,8 @@ const allTasks = async (req, res) => {
 
 const allUnfinishedTasks = async(req, res) => {
     const {done} = req.body
-    const unfinishedTask = await Task.findOne({done})
-    if(!unfinishedTask){
+    const unfinishedTask = await Task.find({done : false})
+    if(unfinishedTask){
         res.status(201).json({unfinishedTask})
     }
 }
