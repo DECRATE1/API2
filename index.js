@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const taskRouter = require("./router/task")
-const { connect } = require("mongoose")
+const { connect, disconnect  } = require("mongoose")
 
 
 const app = express()
@@ -23,7 +23,7 @@ async function main(){
     }
 }
 
-main()
+main();
 
 
 process.on("SIGINT", async() => {
