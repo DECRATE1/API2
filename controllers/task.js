@@ -1,3 +1,4 @@
+const { ObjectId } = require("bson")
 const { Task } = require("../modules/task")
 
 const addTask = async (req, res) => {
@@ -14,20 +15,29 @@ const addTask = async (req, res) => {
 
 const allTasks = async (req, res) => {
     const tasks = await Task.find()
-    res.status(200).json({tasks})
+    return res.status(200).json({tasks})
 }
 
 
 const allUnfinishedTasks = async(req, res) => {
-    const {done} = req.body
     const unfinishedTask = await Task.find({done : false})
-    if(unfinishedTask){
-        res.status(201).json({unfinishedTask})
+    return res.status(201).json({unfinishedTask})
+}
+
+const completeTask = async(req, res) => {
+    const { id } = req.body
+    const task = await Task.findById(id)
+    if(task){
+        task.done = true;
+        await task.save();
+        return res.status(200).json({message : "complete"})
     }
+    return res.status(404).json({error : `no task with id ${id}`});
 }
 
 module.exports = {
     addTask,
     allTasks,
-    allUnfinishedTasks
+    allUnfinishedTasks,
+    completeTask
 }
