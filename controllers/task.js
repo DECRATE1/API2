@@ -40,10 +40,21 @@ const deleteCompleteTasks = async(req, res) => {
     return res.status(200).json({message : "successfully"})
 }
 
+const deleteTask = async(req, res) => {
+    const {id} = req.body
+    const task = await Task.findById(id)
+    if(!task){
+        return res.status(404).json({message : "no task"})
+    }
+    await Task.deleteOne({_id : task._id})
+    return res.status(200).json({message : "delete"})
+}
+
 module.exports = {
     addTask,
     allTasks,
     allUnfinishedTasks,
     completeTask,
-    deleteCompleteTasks
+    deleteCompleteTasks,
+    deleteTask
 }
