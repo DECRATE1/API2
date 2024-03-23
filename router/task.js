@@ -7,6 +7,6 @@ taskRouter.post("/complete", completeTask)
 taskRouter.get("/all", allTasks)
 taskRouter.get("/undone", allUnfinishedTasks)
 taskRouter.delete("/delete", deleteCompleteTasks)
-taskRouter.deletetask("/deletetask", deleteTask)
+taskRouter.delete("/deletetask", deleteTask)
 
 module.exports = taskRouter;
